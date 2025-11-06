@@ -8,20 +8,18 @@ public class ForecastStrategy implements WeatherStrategy {
 
     @Override
     public WeatherData getWeather(String city) {
-        // Forecast: More stable and predictable data
         int temp = getForecastTemp(city);
         int humidity = getStableHumidity(city);
         int windSpeed = getStableWindSpeed(city);
         String condition = getForecastCondition(city);
-
-        // Forecast shows predicted temperatures for next 3 days
+        
         List<Integer> forecastTemps = getThreeDayForecast(city);
 
         return WeatherData.builder()
                 .city(city)
                 .temperature(temp)
                 .humidity(humidity)
-                .windSpeed(windSpeed)  // This should work now
+                .windSpeed(windSpeed)  
                 .condition(condition + " (Forecast)")
                 .temperatureHistory(forecastTemps)
                 .build();
@@ -29,7 +27,7 @@ public class ForecastStrategy implements WeatherStrategy {
 
     private int getForecastTemp(String city) {
         return switch (city.toLowerCase()) {
-            case "astana" -> -3; // More moderate than real-time
+            case "astana" -> -3; 
             case "karaganda" -> 2;
             case "almaty" -> 8;
             default -> 12;
@@ -37,7 +35,6 @@ public class ForecastStrategy implements WeatherStrategy {
     }
 
     private int getStableHumidity(String city) {
-        // Forecast humidity is more stable
         return switch (city.toLowerCase()) {
             case "astana" -> 75;
             case "karaganda" -> 70;
@@ -47,7 +44,6 @@ public class ForecastStrategy implements WeatherStrategy {
     }
 
     private int getStableWindSpeed(String city) {
-        // Forecast wind is more predictable
         return switch (city.toLowerCase()) {
             case "astana" -> 15;
             case "karaganda" -> 12;
@@ -57,7 +53,6 @@ public class ForecastStrategy implements WeatherStrategy {
     }
 
     private String getForecastCondition(String city) {
-        // Forecast conditions are more predictable
         return switch (city.toLowerCase()) {
             case "astana" -> "Partly Cloudy";
             case "karaganda" -> "Mostly Sunny";
@@ -67,7 +62,6 @@ public class ForecastStrategy implements WeatherStrategy {
     }
 
     private List<Integer> getThreeDayForecast(String city) {
-        // Returns temperatures for today, tomorrow, day after tomorrow
         return switch (city.toLowerCase()) {
             case "astana" -> Arrays.asList(-3, -2, -4);
             case "karaganda" -> Arrays.asList(2, 3, 1);
